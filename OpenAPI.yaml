@@ -1,0 +1,142 @@
+openapi: 3.0.3
+info:
+  title: Student Management System
+  version: '1.0'
+servers:
+  - url: http://localhost:8080
+paths:
+  /students:
+    get:
+      operationId: getStudents
+      tags:
+        - students
+      summary: Get all students
+      responses:
+        '200':
+          description: All students
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Students'
+    post:
+      operationId: addStudent
+      tags:
+        - students
+      summary: Add a new student
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Students'
+      responses:
+        '200':
+          description: All students
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Students'
+  /students/{id}:
+    get:
+      operationId: getStudentById
+      tags:
+        - students
+      summary: Get a student by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Id of the student
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The student
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Students'
+    put:
+      operationId: updateStudent
+      tags:
+        - students
+      summary: Update a student
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Id of the student
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Students'
+      responses:
+        '200':
+          description: All students
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Students'
+    delete:
+      operationId: deleteStudent
+      tags:
+        - students
+      summary: Delete a student
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Id of the student
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: All students
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Students'
+    patch:
+      operationId: patchStudent
+      summary: Partially update a student
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Students'
+      responses:
+        '200':
+          description: All students
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Students'
+components:
+  schemas:
+    Students:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
